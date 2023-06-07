@@ -1,16 +1,21 @@
-import { Document, Schema, model  } from 'mongoose';
+import { Document, Model, Schema, model  } from 'mongoose';
 
 
 interface prouductAttrs {
   name: string;
-  price: string;
+  price: number;
 }
 
-interface productDoc extends Document {
+ interface productDoc extends Document {
+  _id: string;
   name: string;
   price: number;
   isActive: boolean;
   version: string;
+}
+
+interface productModel extends Model<productDoc> {
+  build(attrs: prouductAttrs) : productDoc
 }
 
 
@@ -18,6 +23,7 @@ const  productSchema = new Schema ({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   price: {
     type: Number,
@@ -42,6 +48,6 @@ productSchema.statics.build = (attrs: prouductAttrs ) => {
 }
 
 
-const Product = model('products', productSchema);
+const Product = model<productDoc, productModel>('products', productSchema);
 
-export { Product };
+export { Product, productDoc };
