@@ -3,15 +3,15 @@ import { UserCreatedEvent } from "../../../../common/events/userCreatedEvent";
 import { Listener } from "../../../../common/nats-listner";
 import { Subjects } from "../../../../common/subjects";
 import { queueGroupName } from "../queueName";
-import { User } from "../../models/user";
+import { Cart } from "../../models/cart";
 
 export class UserCreatedListener extends Listener<UserCreatedEvent> {
   subject: Subjects = Subjects.UserCreated;
   queueGroupName: string = queueGroupName
-  async onMessage(data: { name: string; email: string; }, msg: Message): Promise<void> {
+  async onMessage(data: UserCreatedEvent['data'], msg: Message): Promise<void> {
     try {
-      const { name , email } = data; 
-      const user = await User.create({ name,  email});
+      const { _id } = data; 
+      await Cart.create({ userId: _id, products: [], totalAmount: 0})
       msg.ack();
     } catch (error) {
       

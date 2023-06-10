@@ -24,7 +24,7 @@ try {
        throw new Error(error);
     }
      const token =  jwt.sign({user, isAdmin: false}, process.env.JWT_SECRET_KEY!, { expiresIn: '2h'});
-     await new UserCreatedPublisher(natsWrapper.client).publish({name: user.name, email: user.email});
+     await new UserCreatedPublisher(natsWrapper.client).publish({name: user.name, email: user.email, _id: user._id});
      res.status(201).json({access_token: token, user});
 } catch (error) {
   next(error);
