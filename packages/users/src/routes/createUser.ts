@@ -4,6 +4,8 @@ import { UserDTO } from '../utils/types/userDTO';
 import { hash } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { ConflictError } from '../app';
+import { UserCreatedPublisher } from '../events/publishers/userCreated.publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router: Router = Router();
 
@@ -22,6 +24,7 @@ try {
        throw new Error(error);
     }
      const token =  jwt.sign({user, isAdmin: false}, process.env.JWT_SECRET_KEY!, { expiresIn: '2h'});
+     await new UserCreatedPublisher(natsWrapper.client).publish({name: user.name, email: user.email});
      res.status(201).json({access_token: token, user});
 } catch (error) {
   next(error);

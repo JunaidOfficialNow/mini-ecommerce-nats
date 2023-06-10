@@ -2,6 +2,8 @@ import { NextFunction, Request, Response, Router } from 'express';
 import { Product, productDoc } from '../models/products';
 import { ConflictError, ForbiddenException, UnAuthorizedException, payloadUser } from '../app';
 import { verify } from 'jsonwebtoken';
+import { ProductCreatedPublisher } from '../events/publishers/productCreated.publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = Router();
 
@@ -47,9 +49,9 @@ type createProductResponse = {
 }
 
 router.post('/api/v1/products',
-isAuthenticated,
-isAdmin,
- async (req: Request<{}, {}, createProductDto>, res: Response<createProductResponse>, next)=> {
+// isAuthenticated,
+// isAdmin,
+ async (req: Request<{}, {}, createProductDto>, res: Response<createProductResponse>, next: NextFunction)=> {
 try {
     const { name, price } = req.body;
     let product;
@@ -63,6 +65,7 @@ try {
       }
       throw new Error(error);
     }
+    new ProductCreatedPublisher(natsWrapper.client).publish({ name: product.name, price: product.price, isActive: product.isActive});
     res.status(201).json({ product });
 } catch (error) {
   next(error);
