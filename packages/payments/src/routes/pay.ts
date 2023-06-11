@@ -2,11 +2,12 @@ import { Router } from "express";
 import { Payment } from "../models/payments";
 import { PaymentSuccessfulPublisher } from "../events/publisher/paymentSuccessfull.publisher";
 import { natsWrapper } from "../nats-wrapper";
+import { isAuthenticated } from "jndminiecomcommon";
 
 const router = Router();
 
 
-router.post('/api/v1/payments/:orderId', async(req, res, next)=> {
+router.post('/api/v1/payments/:orderId', isAuthenticated,async(req, res, next)=> {
 
 try {
     if (!req.body.success) {

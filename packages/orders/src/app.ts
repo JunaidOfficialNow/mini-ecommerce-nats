@@ -3,6 +3,7 @@ import cors from 'cors';
 import logger from 'morgan'
 import { getOrdersRoute } from './routes/getOrders';
 import { InitiatePaymentRoute } from './routes/initiatePayment';
+import { GlobalErrorHandler, NotFoundHandler } from 'jndminiecomcommon';
 
 const app: Express = express();
 
@@ -14,6 +15,11 @@ app.use(express.urlencoded());
 app.use(getOrdersRoute);
 
 app.use(InitiatePaymentRoute);
+
+app.use('*', NotFoundHandler)
+
+app.use(GlobalErrorHandler);
+
 
 
 

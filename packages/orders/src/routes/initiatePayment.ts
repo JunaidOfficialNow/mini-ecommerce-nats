@@ -2,10 +2,11 @@ import { Router } from "express";
 import { Order } from "../models/orders";
 import { PaymentInitiatePublisher } from "../events/publisher/intiatePayment.publisher";
 import { natsWrapper } from "../nats-wrapper";
+import { isAuthenticated } from "jndminiecomcommon";
 
 const router = Router();
 
-router.post('/api/v1/payments/:orderId', async (req, res, next)=> {
+router.post('/api/v1/orders/:orderId/payment', isAuthenticated,async (req, res, next)=> {
   try {
     const order = await Order.findOne({ _id: req.params.orderId });
     if (order) {

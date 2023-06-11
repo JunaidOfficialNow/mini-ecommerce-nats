@@ -3,9 +3,9 @@ import { User } from '../models/user';
 import { UserDTO } from '../utils/types/userDTO';
 import { hash } from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { ConflictError } from '../app';
 import { UserCreatedPublisher } from '../events/publishers/userCreated.publisher';
 import { natsWrapper } from '../nats-wrapper';
+import { ConflictError } from 'jndminiecomcommon';
 
 const router: Router = Router();
 

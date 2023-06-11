@@ -5,6 +5,7 @@ import logger from 'morgan'
 import { getCartRoute } from './routes/getCart';
 import { removeFromCartRoute } from './routes/removeFromCart';
 import { PlaceOrderRoute } from './routes/placeOrder';
+import { GlobalErrorHandler, NotFoundHandler } from 'jndminiecomcommon';
 
 const app: Express = express();
 
@@ -19,5 +20,8 @@ app.use(getCartRoute);
 app.use(removeFromCartRoute);
 app.use(PlaceOrderRoute);
 
+app.use('*', NotFoundHandler)
+
+app.use(GlobalErrorHandler)
 
 export default app;

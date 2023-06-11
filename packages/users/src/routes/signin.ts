@@ -1,8 +1,8 @@
 import { Request, Response, Router } from 'express';
 import { User } from '../models/user';
-import { NotFoundException, UnAuthorizedException } from '../app';
 import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
+import { NotFoundException, UnAuthorizedException } from 'jndminiecomcommon';
 const router = Router();
 
 type userSignInDTO = {
@@ -14,7 +14,7 @@ type userSignResponse = {
   access_token: string;
 }
 
-router.post('/api/v1/auth/login/', async (req: Request<{}, {}, userSignInDTO>, res: Response<userSignResponse>, next) => {
+router.post('/api/v1/users/auth/login/', async (req: Request<{}, {}, userSignInDTO>, res: Response<userSignResponse>, next) => {
 try {
   
     const { email, password } = req.body;

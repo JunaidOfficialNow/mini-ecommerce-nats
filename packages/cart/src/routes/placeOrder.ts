@@ -1,15 +1,14 @@
 import { Router } from "express";
 import { Cart } from "../models/cart";
-import { OrderPlacedEvent } from "../../../common/src/events/orderPlacedEvent";
-import { Subjects } from "../../../common/src/subjects";
-import { PlaceOrderPublisher } from "../events/publisher/placeOrder.publisher";
 import { natsWrapper } from "../nats-wrapper";
 import { OrderCreatedListener } from "../events/listeners/OrderCreated.listener";
 import { Message } from "node-nats-streaming";
+import { PlaceOrderPublisher } from "../events/publisher/placeOrder.publisher";
+import { OrderPlacedEvent, Subjects, isAuthenticated } from "jndminiecomcommon";
 
 const router = Router();
 
-router.post('/api/v1/users/:userId/orders', async (req, res, next) => {
+router.post('/api/v1/carts/:userId/orders', isAuthenticated,async (req, res, next) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId}) as any;
     const toPublishData: OrderPlacedEvent['data'] = {
@@ -32,9 +31,9 @@ router.post('/api/v1/users/:userId/orders', async (req, res, next) => {
     //   }
     //   msg.ack();
     // })
-   res.json({ success: true, message: 'order creaeted'});
+   res.json({ success: true, message: 'order created'});
   } catch (error) {
-    console.log(error);
+    next(error)
   }
 })
 

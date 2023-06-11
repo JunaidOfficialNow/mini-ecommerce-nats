@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { UnAuthorizedException } from '../app';
+import { UnAuthorizedException } from 'jndminiecomcommon';
 import { sign } from 'jsonwebtoken';
 const router = Router();
 
@@ -14,7 +14,7 @@ type adminLoginRespose = {
 }
 
 
-router.post('/api/v1/auth/admin/login', (req: Request<{}, {}, adminLoginDTO>, res: Response<adminLoginRespose>, next)=> {
+router.post('/api/v1/users/auth/admin/login', (req: Request<{}, {}, adminLoginDTO>, res: Response<adminLoginRespose>, next)=> {
 
 try {
     const { email, password } = req.body;

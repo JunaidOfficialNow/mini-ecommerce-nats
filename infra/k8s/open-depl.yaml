@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: open
+  template:
+    metadata:
+      labels:
+        app: open
+    spec:
+      containers:
+        - name: open
+          image: mini/open:latest
+          imagePullPolicy: Never
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: open-srv
+spec:
+  selector:
+    app: open
+  ports:
+    - name: open
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

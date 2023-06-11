@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { Cart } from '../models/cart';
+import { isAuthenticated } from 'jndminiecomcommon';
 
 const router = Router();
 
 
-router.post('/api/v1/users/:userId/carts', async (
+router.post('/api/v1/carts/:userId/', isAuthenticated, async (
   req: Request<{userId: string},{},{productId: string}>, 
   res: Response, 
   next: NextFunction
@@ -32,7 +33,7 @@ router.post('/api/v1/users/:userId/carts', async (
     }
       
    } catch (error) {
-    console.log(error);
+    next(error);
    }
 } )
 export { router as  AddToCartRoute };
