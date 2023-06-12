@@ -40,6 +40,14 @@ export abstract class Listener<T extends Event> {
     })
   }
 
+  customListen() {
+    return this.client.subscribe(
+      this.subject,
+      this.queueGroupName,
+      this.subscriptionOptions()
+    )
+  }
+
   parseMessage(msg: Message) {
     const data = msg.getData();
     return typeof data === 'string'

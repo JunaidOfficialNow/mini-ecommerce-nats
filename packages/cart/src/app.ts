@@ -4,6 +4,7 @@ import cors from 'cors';
 import logger from 'morgan'
 import { getCartRoute } from './routes/getCart';
 import { removeFromCartRoute } from './routes/removeFromCart';
+import { PlaceOrderRoute } from './routes/placeOrder';
 
 const app: Express = express();
 
@@ -16,6 +17,7 @@ app.use(express.urlencoded());
 app.use(AddToCartRoute)
 app.use(getCartRoute);
 app.use(removeFromCartRoute);
+app.use(PlaceOrderRoute);
 
 
 export default app;

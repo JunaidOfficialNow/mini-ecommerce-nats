@@ -23,7 +23,6 @@ interface OrderDoc extends Document {
 const productSchema = new Schema({
   productId: Schema.Types.ObjectId,
   quantity: Number,
-  price: Number
 }, {_id: false});
 
 const orderSchema = new Schema({
@@ -37,6 +36,7 @@ const orderSchema = new Schema({
     required: true,
   },
   totalAmount: Number,
+  created: Boolean,
 });
 
 
