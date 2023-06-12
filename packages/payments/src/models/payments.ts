@@ -7,8 +7,12 @@ const paymentSchema = new Schema({
     required: true,
   },
   userId: Schema.Types.ObjectId,
-  userName: {
-    type: String,
-    required: true,
+  paid: {
+    type: Boolean,
+    default: false,
   }
 })
+
+const Payment = model('nats-payments', paymentSchema)
+
+export { Payment };

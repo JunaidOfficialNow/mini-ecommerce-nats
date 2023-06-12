@@ -1,9 +1,7 @@
 import { Message } from "node-nats-streaming";
-import { ProductCreatedEvent } from "../../../../common/events/productCreatedEvent";
-import { Listener } from "../../../../common/nats-listner";
-import { Subjects } from "../../../../common/subjects";
 import { queueGroupName } from "../queueName";
 import { Product } from "../../models/product";
+import { Listener, ProductCreatedEvent, Subjects } from "jndminiecomcommon";
 
 export class ProductCreated extends Listener<ProductCreatedEvent> {
   readonly subject: Subjects = Subjects.ProductCreated

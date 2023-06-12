@@ -1,7 +1,5 @@
 import { Message } from "node-nats-streaming";
-import { ProductCreatedEvent } from "../../../../common/events/productCreatedEvent";
-import { Listener } from "../../../../common/nats-listner";
-import { Subjects } from "../../../../common/subjects";
+import { Listener, ProductCreatedEvent, Subjects } from "jndminiecomcommon";
 import { queueGroupName } from "../queueName";
 import { Product } from "../../models/product";
 

@@ -1,7 +1,5 @@
 import { Message } from "node-nats-streaming"
-import { OrderPlacedEvent } from "../../../../common/events/orderPlacedEvent"
-import { Listener } from "../../../../common/nats-listner"
-import { Subjects } from "../../../../common/subjects"
+import { Listener, OrderPlacedEvent, PaymentSuccesfullEvent, Subjects } from "jndminiecomcommon";
 import { queueGroupName } from "../queneName"
 import { Order } from "../../models/orders"
 import { OrderCreatedPublisher } from "../publisher/orderCreated.publisher"

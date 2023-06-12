@@ -17,6 +17,7 @@ interface OrderDoc extends Document {
   userId: string;
   products: Array<{productId: string, quantity: number, price: number}>;
   totalAmount: number;
+  paid: boolean;
   version: number;
 }
 
@@ -37,6 +38,10 @@ const orderSchema = new Schema({
   },
   totalAmount: Number,
   created: Boolean,
+  paid: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 

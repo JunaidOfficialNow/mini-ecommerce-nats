@@ -1,8 +1,6 @@
 import { Message } from "node-nats-streaming";
-import { OrderCreatedEvent } from "../../../../common/events/OrderPublishedEvent";
-import { Listener } from "../../../../common/nats-listner";
-import { Subjects } from "../../../../common/subjects";
 import { queueGroupName } from "../queueName";
+import { Listener, OrderCreatedEvent, Subjects } from "jndminiecomcommon";
 
 export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
   readonly subject: Subjects = Subjects.OrderCreated

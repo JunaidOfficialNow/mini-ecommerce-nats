@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { Cart } from "../models/cart";
-import { OrderPlacedEvent } from "../../../common/events/orderPlacedEvent";
-import { Subjects } from "../../../common/subjects";
+import { OrderPlacedEvent } from "../../../common/src/events/orderPlacedEvent";
+import { Subjects } from "../../../common/src/subjects";
 import { PlaceOrderPublisher } from "../events/publisher/placeOrder.publisher";
 import { natsWrapper } from "../nats-wrapper";
 import { OrderCreatedListener } from "../events/listeners/OrderCreated.listener";

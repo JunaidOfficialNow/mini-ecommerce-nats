@@ -1,7 +1,5 @@
-import { Message, SubscriptionOptions } from "node-nats-streaming";
-import { UserCreatedEvent } from "../../../../common/events/userCreatedEvent";
-import { Listener } from "../../../../common/nats-listner";
-import { Subjects } from "../../../../common/subjects";
+import { Message } from "node-nats-streaming";
+import { Listener, Subjects, UserCreatedEvent } from "jndminiecomcommon";
 import { queueGroupName } from "../queneName";
 import { User } from "../../models/user";
 
