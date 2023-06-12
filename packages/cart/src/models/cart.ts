@@ -35,7 +35,6 @@ const cartSchema = new Schema({
     type: [productSchema],
     required: true,
   },
-  totalAmount: Number,
 });
  
 
@@ -49,6 +48,6 @@ cartSchema.statics.build = (attrs: CartAttrs) => {
   })
 }
 
-const Cart = model<CartDoc, cartModel>('orders', cartSchema);
+const Cart = model<CartDoc, cartModel>('cart', cartSchema);
 
 export { Cart };

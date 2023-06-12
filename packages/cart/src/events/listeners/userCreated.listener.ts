@@ -11,7 +11,7 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
   async onMessage(data: UserCreatedEvent['data'], msg: Message): Promise<void> {
     try {
       const { _id } = data; 
-      await Cart.create({ userId: _id, products: [], totalAmount: 0})
+      await Cart.create({ userId: _id, products: []})
       msg.ack();
     } catch (error) {
       
